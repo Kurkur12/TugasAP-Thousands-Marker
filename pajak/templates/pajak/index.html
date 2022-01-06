@@ -1,0 +1,80 @@
+<html>
+<head>
+    <title>
+        {{ judul }}
+    </title>
+
+    <style>
+        table, th, td {
+            border: 1px solid black; 
+            border-collapse: collapse;
+            padding: .2rem .5rem;
+        }
+        .dataTax{
+            text-align: right;
+        }
+        .exc{
+            color : red;
+        }
+    </style>
+</head>
+<body>
+    <h1>Progressive Tax Calculation</h1>
+    <p>This is a course project for Algorithms and Programming course at Departement of Informatics, Universitas Muhammadiyah Surakarta </p>
+    <hr>
+    <form action="" method="post"> {% csrf_token %}
+        <p>Your monthly (number only, no period "." nor comma "," )  <input type="text" name="tax">
+        <input type="submit" value="submit">
+
+    </form>
+    {% if exc%}
+        <p class="exc">{{exc}}</p>
+        <br><br>
+    {% endif%}
+
+    {% if resultTax%}
+         <p>You just Entered <em><strong>{{rtCur}}</strong></em></p>
+         <br>
+         <table class="">
+             <tr>
+                 <th>Taxable Income Bracket</th>
+                 <th>Tax Rate</th>
+                 <th>Your Owed Tax</th>
+             </tr>
+             {% for x in resultTax %}
+                <tr class="dataTax">
+                     {% for data in x %}
+                        <td>{{data}}</td>
+                     {% endfor %}
+                </tr>
+             {% endfor %}
+             <tr>
+                <th colspan="2">Total</th>
+                <th>{{totalTax}}</th>
+            </tr>
+        </table>
+        <a href="{% url 'utama' %}">Refresh the page</a>
+    {% endif%}
+    <hr>
+
+    <h1>Nama: <i>{{ nama }}<i></h1>
+    <h2>NIM: {{ NIM }}</h2>
+    <h2> {{ waktu }}</h2>
+
+    <p>{{ pesan }}</p>
+<!--
+     <form action="" method="post"> {% csrf_token %}
+        write something: <input type="text" name="kalimat">
+        <input type="submit" value="submit">
+        </form>
+
+    {% if kal %}
+        You just entered <i> {{ kal }}</i>. <br>
+        For your information, it has: <br> <br>
+        Vowels    : {{ vowels }}  <br>
+        Consonants: {{ consonants }}  <br> <br>
+        <a href="{% url 'utama' %}">refresh this page.</a>
+    {% endif %} 
+        -->
+</body>
+</html>
