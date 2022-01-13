@@ -33,6 +33,7 @@ def code(request):
             context.update({"exc":"Please insert positive integer! "})
         # vo = countVowels(rt)
         # co = countConsonants(rt)
-
-
+    
     return render(request , 'pajak/index.html', context)
+def about(request):
+    return render(request, 'pajak/about.html')

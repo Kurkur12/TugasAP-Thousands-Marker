@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from pajak.views import about
 
 from pajak.views import code
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('about/', about),
     path('', code, name='utama'),
 ]

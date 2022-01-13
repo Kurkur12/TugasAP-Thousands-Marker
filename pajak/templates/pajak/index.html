@@ -5,6 +5,45 @@
     </title>
 
     <style>
+        body {
+            background-color: rgb(155, 216, 235);
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .kk {
+            color: white;
+            font-size: 15px;
+            text-decoration: none;
+        }
+        .tble thead th {
+            background-color: rgb(137, 165, 241);
+            color: rgb(0, 0, 0);
+            padding: 12px 13px;
+        }
+
+        .tble1 {
+            border-collapse: collapse;
+            min-width: 300px;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+        }
+
+        .tble1 tr {
+            background-color: rgb(22, 22, 22);
+            color: white;
+        }
+        .tble1 th {
+            padding: 15px;
+        }
+
+        .atas {
+            font-size: 40px;
+        }
+
+        .atk {
+            font-size: 27px;
+        }
+
         table, th, td {
             border: 1px solid black; 
             border-collapse: collapse;
@@ -16,13 +55,20 @@
         .exc{
             color : red;
         }
+        
+        .tble tbody {
+            background-color: #f3f3f3;
+        }
+        .kj {
+            font-weight: lighter;
+        }
     </style>
 </head>
 <body>
-    <h1>Progressive Tax Calculation</h1>
-    <p>This is a course project for Algorithms and Programming course at Departement of Informatics, Universitas Muhammadiyah Surakarta </p>
+    <h1 class="atas">Progressive Tax Calculation</h1>
+    <p class="at">This is a course project for Algorithms and Programming course at Departement of Informatics, Universitas Muhammadiyah Surakarta.  <a href="/about">About</a></p>
     <hr>
-    <form action="" method="post"> {% csrf_token %}
+    <form action="" method="post" class="at"> {% csrf_token %}
         <p>Your monthly (number only, no period "." nor comma "," )  <input type="text" name="tax">
         <input type="submit" value="submit">
 
@@ -33,48 +79,51 @@
     {% endif%}
 
     {% if resultTax%}
-         <p>You just Entered <em><strong>{{rtCur}}</strong></em></p>
+         <p class="atk">You just Entered <em><strong>{{rtCur}}</strong></em>. Your detailed tax:</p>
          <br>
-         <table class="">
-             <tr>
-                 <th>Taxable Income Bracket</th>
-                 <th>Tax Rate</th>
-                 <th>Your Owed Tax</th>
-             </tr>
-             {% for x in resultTax %}
-                <tr class="dataTax">
-                     {% for data in x %}
-                        <td>{{data}}</td>
-                     {% endfor %}
+         <table class="tble">
+            <thead>
+                <tr class="">
+                    <th>Taxable Income Bracket</th>
+                    <th>Tax Rate</th>
+                    <th>Your Owed Tax</th>
                 </tr>
-             {% endfor %}
-             <tr>
-                <th colspan="2">Total</th>
-                <th>{{totalTax}}</th>
-            </tr>
+            </thead>
+            <tbody>
+                {% for x in resultTax %}
+                    <tr class="dataTax">
+                        {% for data in x %}
+                            <td>{{data}}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <th colspan="2">Total</th>
+                    <th>{{totalTax}}</th>
+                </tr>
+            </tbody>
         </table>
-        <a href="{% url 'utama' %}">Refresh the page</a>
     {% endif%}
     <hr>
 
-    <h1>Nama: <i>{{ nama }}<i></h1>
-    <h2>NIM: {{ NIM }}</h2>
-    <h2> {{ waktu }}</h2>
+    <h1 class="kj">Group:</h1>
+    <ol>
+        <li>Name: Kurniawan Bagaskara/L200214253</li>
+        <li>Name: Ferdinan Bima Anggara/L200214113</li>
+        <li>Name: Fachry Ahsan Al Musawa/L200214269</li>
+    </ol>
 
-    <p>{{ pesan }}</p>
-<!--
-     <form action="" method="post"> {% csrf_token %}
-        write something: <input type="text" name="kalimat">
-        <input type="submit" value="submit">
-        </form>
-
-    {% if kal %}
-        You just entered <i> {{ kal }}</i>. <br>
-        For your information, it has: <br> <br>
-        Vowels    : {{ vowels }}  <br>
-        Consonants: {{ consonants }}  <br> <br>
-        <a href="{% url 'utama' %}">refresh this page.</a>
-    {% endif %} 
-        -->
+    <h1 class="kj">Lecturer:</h1>
+    <ol>
+        <li>Fajar Suryawan, Ph.D</li>
+    </ol>
+    
+       
+            <p>{{ waktu }}</p>
+            <p><a class="kk" href="{% url 'utama' %}">Refresh the page.</a> | <a class="kk" href="/about"> About</a></th>
+        
+ 
+    
+    
 </body>
 </html>
